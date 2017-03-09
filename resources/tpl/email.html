@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <h3 class="modal-title">Envío de email</h3>
+</div>
+<form ng-submit="enviarMail(emailData.$valid)" name="emailData" style="padding-top: 10px" novalidate>
+    <div class="modal-body">
+        <div class="row ">
+            <div class="form-group col-xs-12 col-md-6 col-sm-6">
+                <span class="requiredAst">*</span>
+                <input type="text" class="form-control" name="nombre" ng-model="user.nombre" placeholder="Nombre" required>
+                <span ng-show="emailData.nombre.$touched && emailData.nombre.$error.required" class="error">Nombre es requerido</span>
+            </div>
+            <div class="form-group col-xs-12 col-md-6 col-sm-6">
+                <span class="requiredAst">*</span>
+                <input type="text" class="form-control" name="apellido" ng-model="user.apellido" placeholder="Apellido" required>
+                <span ng-show="emailData.apellido.$touched && emailData.apellido.$error.required" class="error">Apellido es requerido</span>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="form-group col-xs-12 col-md-6 col-sm-6">
+                <span class="requiredAst">*</span>
+                <input type="email" class="form-control" name="email" ng-model="user.email" placeholder="Email" required>
+                <span ng-show="emailData.email.$touched && emailData.email.$error.required" class="error">Email es requerido</span>
+                <span ng-show="emailData.email.$touched && !emailData.email.$error.required && emailData.email.$error.email" class="error">Email debe ser: XXX@XXX.com</span>
+            </div>
+            <div class="form-group col-xs-12 col-md-6 col-sm-6">
+                <input type="text" class="form-control" name="telefono" ng-model="user.telefono" placeholder="Teléfono" ng-pattern="/^[0-9]+$/">
+                <span ng-show="emailData.telefono.$touched && emailData.telefono.$error.pattern" class="error">Teléfono inválido</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <span class="requiredAst">*</span>
+                <textarea class="form-control " rows="6" name="mensaje" validate-email ng-model="user.mensaje" placeholder="Mensaje" required maxlength="2000"></textarea>
+                <span ng-show="emailData.mensaje.$touched && emailData.mensaje.$error.required" class="error">Mensaje es requerido</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel($event)">Cerrar</button>
+        <button type="submit" class="btn btn-primary pull-right" ng-disabled="emailData.$invalid">Enviar</button>
+    </div>
+</form>

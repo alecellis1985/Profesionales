@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-xs-12">
+        <label>El usuario acepta las siguientes formas de pago</label>
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-xs-12">
+                <span  ng-if="selectedUser.contado == 1">Contado </span>
+                <span  ng-if="selectedUser.credito == 1">Crédito </span>
+                <span  ng-if="selectedUser.debito == 1">Débito </span>
+            </div>  
+        </div>
+        <label>Otras</label>
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-xs-12">
+                <span  ng-if="selectedUser.otras !== undefined" ng-bind="selectedUser.otras"> </span>
+            </div>  
+        </div>
+        
+    </div>
+</div>

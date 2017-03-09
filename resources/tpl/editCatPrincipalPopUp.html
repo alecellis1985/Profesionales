@@ -1,0 +1,18 @@
+<div class="modal-header" style="border-bottom: none;">
+    <h3 class="modal-title">Editar Categoría Principal</h3>
+</div>
+<form ng-submit="editarCat()" name="editCatForm" id="editPwdForm" style="padding-top: 10px" method="post" novalidate>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-xs-12 col-sm-6">
+                <dropdown-Filter selected-Elem="selectedCategoria" selected-Element-Fn="selectCategoria" name-Prop="categoriaNombre" elements-Arr="categorias" placeholder-Filter="Filtro de categorias"></dropdown-Filter>                
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="border-top: none;">
+        
+                <button type="submit" class="btn btn-default">Guardar</button>
+                <button class="btn btn-primary" ng-click="cancel()">Cancelar</button>
+           
+    </div>
+</form>

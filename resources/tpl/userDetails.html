@@ -1,0 +1,65 @@
+<div class="panel panel-primary user-details"  collapse="elemColapsed">
+    <div class="panel-heading">
+         <h3 class="panel-title">{{selectedUser.nombre}} {{selectedUser.apellido}}</h3>
+         <button  type="button" class="close" ng-click="elemColapsed = true" style="position: relative;top: -18px;">
+             <span aria-hidden="true">×</span>
+         </button>
+     </div>
+     <div class="panel-body">
+         <div class="row">
+             <div class="col-xs-12 col-sm-6 col-md-3">
+                 <div class='row'>
+                     <div class="col-xs-12 main-block-card">
+                        <fancy-img ng-if="selectedUser.imagenUrl !== undefined && selectedUser.imagenUrl !== ''" background-url="{{selectedUser.imagenUrl}}" ></fancy-img>                        
+                        <div class="cardColor" ng-style="{'background-color':selectedUser.cardcolor}" ng-if="selectedUser.plan<7 && selectedUser.cardcolor && (selectedUser.imagenUrl === undefined || selectedUser.imagenUrl === '')">
+                            <h3 class="nice-h6" style='text-transform: uppercase;' ng-fi-text ng-fi-text-html="{{ selectedUser.nombre | limitTo:1 }}{{ selectedUser.apellido | limitTo:1 }}"></h3>
+                            <h3 class="nice-h7" ng-fi-text="{{selectedUser.categoria}}"></h3>
+                        </div>
+                        <div class="cardColor" ng-style="{'background-color':selectedUser.cardcolor}" ng-if="selectedUser.plan > 6 && selectedUser.cardcolor && (selectedUser.imagenUrl === undefined || selectedUser.imagenUrl === '')">
+                            <h3 class="nice-h6" ng-fi-text ng-fi-text-html="{{ selectedUser.nombre }}"></h3>
+                            <h3 class="nice-h7" ng-fi-text="{{selectedUser.categoria}}"></h3>
+                        </div>
+                     </div> 
+                     
+                 </div>
+             </div>
+             <div class="col-xs-12 col-sm-6 col-md-9 user-detail-icons">
+                 <div class="row">
+                     <label>Descripción Del Servicio</label>
+                     <textarea class="textareaCustom shortDesc" disabled="disabled" ng-bind="selectedUser.descService"></textarea>
+                 </div>
+                 <div class="row over_flow" ng-if="selectedUser.telefonoEmp && selectedUser.telefonoEmp.length>0">
+                    <i class="fa fa-phone-square"></i>
+                    <span ng-repeat="tel in selectedUser.telefonoEmp">{{tel.val}}<span ng-if="$index<selectedUser.telefonoEmp.length-1">,&nbsp;</span></span>
+                </div>
+                 <div class="row" ng-if="selectedUser.direccion && selectedUser.direccion.length>0">
+                     <i class="fa fa-home"></i>
+                     <span ng-repeat="dir in selectedUser.direccion">{{dir.val}}<span ng-if="$index < selectedUser.direccion.length-1">,&nbsp;</span></span>                     
+                 </div>
+                 <div class="row" ng-if="selectedUser.sitioWeb">
+                     <i class="fa fa-globe" title="Url sito Web"></i>
+                     <span ng-bind="selectedUser.sitioWeb"></span>
+                 </div>
+             </div>
+         </div>
+         <div class='row marginRow'>
+             <div class="col-xs-12 col-md-12 col-sm-12" ng-show="!elemColapsed">
+                 <tabset>
+                     <tab ng-repeat="tab in tabs" heading="{{tab.title}}" ng-click="tabSelected(tab)" active="tab.active" disabled="tab.disabled">
+                         <div ng-include="tab.content"></div>
+                     </tab>
+                 </tabset>
+             </div>
+         </div>
+         <div class="row">
+             <div class="form-group big-fa col-xs-12">
+                 <prof-a-custom href-Link="selectedUser.facebookUrl" icon="fa fa-facebook-official" icon-Title="Facebook"></prof-a-custom>
+                 <prof-a-custom href-Link="selectedUser.twitterUrl" icon="fa fa-twitter-square" icon-Title="Twitter"></prof-a-custom>
+                 <prof-a-custom href-Link="selectedUser.linkedinUrl" icon="fa fa-linkedin-square" icon-Title="Linkedin"></prof-a-custom>
+                 <a href="/" class="btn btn-primary pull-right" stop-All-Events ng-click="enviarMail($event,selectedUser.email)" title="Enviar mail">
+                     <i class="glyphicon glyphicon-envelope"></i>
+                 </a>
+             </div>
+         </div>
+     </div>
+ </div>

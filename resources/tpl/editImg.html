@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h3 class="modal-title">Editar Imagen</h3>
+</div>
+<form ng-submit="editarImg($event)" id="editImgForm" name="editImgForm" role="form" method="POST">
+    <div class="modal-body">
+        <div class="modal-body">
+            <div class="form-group">
+
+                <input id="uploadFile" name="imageUpload" class="form-control" style="display: inline-block; width: 85%" 
+                       placeholder="Foto o Logo" disabled="disabled" ng-model="files[0].name"/>
+                <div class="fileUpload btn btn-primary" style="position: relative;">
+                    <span class="glyphicon glyphicon-folder-open"></span>
+                    <input id="uploadBtn" type="file" class="upload" ng-file-select ng-model="files" image-upload/>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-default" ng-disabled="editImgForm.$invalid">Guardar</button>
+            <button class="btn btn-primary" ng-click="cancel()">Cerrar</button>
+        </div>
+    </div>
+</form>

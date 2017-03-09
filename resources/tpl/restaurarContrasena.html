@@ -1,0 +1,27 @@
+<div class="modal-header" style="border-bottom: none;">
+    <h3 class="modal-title">Nueva contraseña</h3>
+</div>
+<form ng-submit="resetUserPassword($event)" id="resetPw" role="form" method="POST">
+    <div class="modal-body">
+    <div class="row">
+        <div class="col-xs-12">
+            <label>Ingresá tu e-mail y te enviaremos instrucciones para recuperar tu contraseña.</label>
+        </div>    
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-12 col-sm-3">
+            <span class="requiredAst">*</span>
+            <input type="email" class="form-control" name="email" ng-model="user.email" maxlength="60" placeholder="Email" required>
+            <span ng-show="registerUser.email.$touched" class="error">Email es requerido.</span>
+        </div>
+    </div>
+    </div>
+    <div class="modal-footer" style="border-top: none;">
+        <div class="row">
+            <div class="col-xs-12 col-sm-5 pull-left" style="text-align: left;">
+                <button type="submit" class="btn btn-primary">Recuperar</button>
+            <button type="reset" class="btn btn-default" ng-click="goBackRegistration($event)" style="padding: 8px 18px 7px;">Volver <i class="fa fa-reply"></i></button>
+            </div>
+        </div>
+    </div>
+</form>

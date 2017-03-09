@@ -1,0 +1,347 @@
+<div class="registroProf specialRow" ng-hide="registro.mostrarRegistro">
+        <div class="col-xs-12 col-md-12 col-sm-12 registerTitle">
+            <div style="position: absolute; left: 50%;">
+                <div style="position: relative; left: -50%;">
+                    <div class="special-white-bg col-xs-12">
+                        <h2>¡Haga crecer su negocio con Profesionales.uy!</h2>
+                        <h3>¿Qué le ofrecemos?</h3>
+                        
+                        <p>
+                            <i class="fa fa-check-circle-o"></i>Reciba solicitudes de presupuesto.<br />
+                            <i class="fa fa-check-circle-o"></i>Consiga nuevos clientes y multiplique el éxito de su negocio.<br />
+                            <i class="fa fa-check-circle-o"></i>Llegue a miles de usuarios interesados en sus servicios profesionales.
+                        </p>
+                    </div>
+                    <div class="niceBackground col-xs-12">
+                        <!--<h1 class="superH1" ng-fi-text="¡Registro Gratis Por 1 Mes!"></h1>-->
+                        <button class="btn btn-primary" ng-click="showPlan(0)">
+                            <i class="glyphicon glyphicon-education"></i> Profesional
+                            <br>
+                            <span>&nbsp;</span>
+                        </button>
+                        <button class="btn btn-primary" ng-click="showPlan(1)">
+                            <i class="glyphicon glyphicon-briefcase"></i> 
+                            <span>Empresas</span>
+                            <br>
+                            <span style="font-size: 14px;">2 o más socios</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--<div style="margin-top: 20px;float: left;">-->
+        <planes-details selected-plan-fn="showRegistration(e,tipo,duracion,categoria)" selected-plan="selectedPlan" elem-colapsed="isCollapsed" available-plans="profesionalesAvailablePlans"></planes-details>
+    
+</div>  
+
+<form ng-submit="registrarUsuario()" name="registerUser" style="padding-top: 10px" ng-show="registro.mostrarRegistro" 
+      method="post" novalidate>
+    
+    <div class="panel panel-primary">
+        
+        <div class="panel-heading" style='position:relative'>
+            <h3 class="panel-title" ng-hide="registro.empresa">Datos personales de contacto</h3>
+            <h3 class="panel-title" ng-show="registro.empresa">Datos de la Empresa</h3>
+            <button class="btn btn-default volver-header" ng-click="goBackRegistration($event)">Volver <i class="fa fa-reply"></i></button>
+        </div>
+        
+        <div class="panel-body personalData">
+            <div class="row ">
+                
+                <div class="form-group col-xs-12 col-md-4">
+                    <input type="text" class="form-control" name="nombre" ng-model="user.nombre" placeholder="Nombre" required maxlength="50">
+                    <span class="requiredAst">*</span>
+                    <span ng-show="registerUser.nombre.$touched && registerUser.nombre.$error.required" class="error">Nombre es requerido.</span>
+                </div>
+                
+                <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
+                    <input type="text" class="form-control" name="apellido" maxlength="50" ng-model="user.apellido" placeholder="Apellido" ng-required="!registro.empresa">
+                    <span class="requiredAst">*</span>
+                    <span ng-show="registerUser.apellido.$touched && registerUser.apellido.$error.required" class="error">Apellido es requerido.</span>
+                </div>
+                
+                <div class="form-group col-xs-10 col-md-3">
+                    <span class="requiredAst">*</span>
+                    <input type="text" class="form-control" name="username" ng-model="user.username" maxlength="20" placeholder="Nombre de usuario" 
+                           required username ng-model-options="{ debounce: 500 }">
+                    <span ng-show="registerUser.username.$touched && registerUser.username.$error.required" class="error">Nombre de usuario es requerido.</span>
+                    <span ng-show="registerUser.username.$pending.username" class="alert-info">Comprobando disponibilidad...</span>
+                    <span ng-show="registerUser.username.$error.username && registerUser.username.$touched" class="error">
+                        Nombre de usuario en uso.
+                    </span>
+                </div>
+                 
+                <div class="form-group">
+                    <span class="requiredAst">*</span>
+                    <i class="fa fa-check-circle fa-lg" ng-show="!registerUser.username.$error.username && !registerUser.username.$error.required && registerUser.username.$touched" style="color: green;"></i>                                        
+                    <i class="fa fa-times fa-lg" ng-show="registerUser.username.$error.username && registerUser.username.$touched" style="color: red;"></i>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-4" >
+                    <span class="requiredAst">*</span>
+                    <input type="password" class="form-control" name="password" ng-model="user.password" maxlength="20" placeholder="Contraseña" 
+                           required ng-minlength=6>
+                    <span ng-show="registerUser.password.$error.minlength" class="error">La contraseña debe ser de al menos 6 caracteres.</span>
+                    <span ng-show="registerUser.password.$touched && registerUser.password.$error.required" class="error">Contraseña es requerida.</span>
+                </div>
+                <div class="form-group col-xs-12 col-md-4" >
+                    <span class="requiredAst">*</span>
+                    <input type="password" class="form-control" name="passwordConfirm" ng-model="user.passwordConfirm" maxlength="20" placeholder="Confirmar Contraseña" 
+                           required ng-minlength=6 ng-model-options="{ updateOn: 'blur' }" compare-to="registerUser.password.$viewValue">
+                    <span ng-show="registerUser.passwordConfirm.$error.minlength" class="error">La contraseña debe ser de al menos 6 caracteres. </span>
+                    <span ng-show="registerUser.passwordConfirm.$touched && registerUser.passwordConfirm.$error.compareTo" class="error">Contraseñas no coinciden.</span>
+                </div>
+            
+                <div class="form-group col-xs-10 col-md-3">
+                    <span class="requiredAst">*</span>
+                    <input type="email" class="form-control" name="email" ng-model="user.email" maxlength="60" placeholder="Email" required
+                           email-unique ng-model-options="{ debounce: 500 }">
+                    <span ng-show="registerUser.email.$touched && registerUser.email.$error.required" class="error">Email es requerido.</span>
+                    <span ng-show="registerUser.email.$touched && !registerUser.email.$error.required && registerUser.email.$error.email" class="error">Email debe ser: XXX@XXX.com</span>
+
+                    <span ng-show="registerUser.email.$pending.emailUnique" class="alert-info">Comprobando...</span>
+                    <span ng-show="registerUser.email.$error.emailUnique && registerUser.email.$touched" class="error">
+                        Email en uso
+                    </span>
+                </div>
+    
+                <div class="form-group">
+                    <span class="requiredAst">*</span>
+                    <i class="fa fa-check-circle fa-lg" ng-show="!registerUser.email.$error.emailUnique && !registerUser.email.$error.required && registerUser.email.$touched" style="color: green;"></i>                                        
+                    <i class="fa fa-times fa-lg" ng-show="registerUser.email.$error.emailUnique && registerUser.email.$touched" style="color: red;"></i>
+                </div>
+            
+            </div>
+            
+            <div class="row ">
+                <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
+                    <span class="requiredAst">*</span>
+                    <input type="text" class="form-control" name="telefono" ng-model="user.telefono" maxlength="25" placeholder="Teléfono +598" ng-required="!registro.empresa" ng-pattern="/^[0-9+]+$/">
+                    <span ng-show="registerUser.telefono.$touched && registerUser.telefono.$error.required" class="error">Teléfono es requerido.</span>
+                    <span ng-show="registerUser.telefono.$touched && !registerUser.telefono.$error.required && registerUser.telefono.$error.pattern" class="error">Teléfono inválido.</span>
+                </div>
+                <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
+                    <input type="text" class="form-control" name="celular" ng-model="user.celular" maxlength="25" placeholder="Celular +598" ng-pattern="/^[0-9+]+$/">
+                    <span ng-show="registerUser.celular.$touched && registerUser.celular.$error.pattern" class="error">Teléfono inválido.</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Datos de tu negocio</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-3">                    
+                    <div ng-dropdown-multiselect="" checkboxes="true" translation-texts="categoriasTexts" options="categorias" extra-settings="categoriaSettings"  selected-model="selectedCategorias"></div>
+                </div>
+                <div class="form-group col-xs-12 col-md-3">
+
+                    <div ng-dropdown-multiselect="" checkboxes="true" translation-texts="departamentosTexts" events="DepartamentosEvents" options="departamentosList" extra-settings="departamentosSettings"  selected-model="selectedDepartamentos"></div>
+                </div>
+                <div class="form-group col-xs-12 col-md-3" ng-show="showBarrios">                    
+                    <div ng-dropdown-multiselect="" checkboxes="true" translation-texts="barriosTexts" options="barrios" extra-settings="barriosSettings"  selected-model="selectedBarrios"></div>                    
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-xs-12 col-md-4">
+                    <span class="requiredAst">*</span>
+                    <input type="text" name="telefonoEmp" class="form-control" ng-model="user.telefonoEmp" maxlength="25" placeholder="Teléfono Empresa +598" required ng-pattern="/^[0-9+]+$/">
+                    <span ng-show="registerUser.telefonoEmp.$touched && registerUser.telefonoEmp.$error.required" class="error">Teléfono es requerido</span>
+                    <span ng-show="registerUser.telefonoEmp.$touched && !registerUser.telefonoEmp.$error.required && registerUser.telefonoEmp.$error.pattern" class="error">Teléfono inválido</span>
+                </div>
+                
+                <div class="form-group col-xs-12 col-md-3" ng-repeat="tel in telefonosEmp">                    
+                    <input ng-if="telefonosEmp.length > 0" type="text" name="direccion" class="form-control" ng-model="tel.val" maxlength="50" placeholder="Teléfono Empresa +598"><i class="fa fa-minus-square-o" ng-click="removeTelefonoEmp(tel)" title="Borrar Teléfono"></i>
+                </div>
+                <div class="direccion" ng-click="addTelefonoEmp()" ng-hide="telefonosEmp.length > 4"><i class="fa fa-plus"></i><label>Agregar Teléfono</label></div>
+                
+                
+                <div class="form-group col-xs-12 col-md-4">
+                    <input type="url" name="sitioWeb" class="form-control" ng-model="user.sitioWeb" maxlength="250" placeholder="Sitio Web">
+                    <span ng-show="registerUser.sitioWeb.$touched && registerUser.sitioWeb.$error.url" class="error">URL inválida, no olvide incluir el prefijo https:// o http://</span>
+                </div>
+            </div>
+            
+            
+            <div class="row ">
+            <div class="form-group col-xs-12 col-md-4" >
+                 <h3 class="small-h3">Selecciona una foto</h3>
+            </div>  
+            <div class="form-group col-sm-12 col-sm-12 hidden-xs col-md-4" >
+                <h3 class="small-h3">O un color personalizado para la tarjeta</h3>
+            </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-xs-12 col-md-4" >
+                    <input id="uploadFile" name="imageUpload" class="form-control" style="display: inline-block; width: 82%" 
+                           placeholder="Foto o Logo de 130px x 150px" disabled="disabled" ng-model="files[0].name"/>
+                    <div class="fileUpload btn btn-primary">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <input id="uploadBtn" type="file" class="upload" ng-file-select name="file" ng-model="files" image-upload/>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12 hidden-sm hidden-md hidden-lg col-md-4" >
+                    <h3 class="small-h3">O un color personalizado para la tarjeta</h3>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <div ng-if="user.imagenUrl === undefined || user.imagenUrl === null">
+                        <label style="padding-right: 10px;"><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#A21E2C" ng-click="myStyle={'background-color':'#A21E2C'}">Bordó</label>
+                        <label style="padding-right: 10px;"><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#28A44C" ng-click="myStyle={'background-color':'#28A44C'}">Verde</label>
+                        <label><input type="radio" name="cardcolor" ng-model="user.cardcolor" value="#3F4C54" ng-click="myStyle={'background-color':'#3F4C54'}">Gris</label>
+                        <div class="cardColor" ng-style="myStyle" ng-if="registro.empresa && user.cardcolor">
+                            <h3 class="nice-h6" ng-fi-text ng-fi-text-html="{{ user.nombre }}"></h3>
+                            <h3 class="nice-h7" ng-fi-text="Profesión"></h3>
+                        </div>
+                        <div class="cardColor" ng-style="myStyle" ng-if="!registro.empresa && user.cardcolor">
+                            <h3 class="nice-h6" ng-fi-text ng-fi-text-html="{{ user.nombre | limitTo:1 }}{{ user.apellido | limitTo:1 }}"></h3>
+                            <h3 class="nice-h7" ng-fi-text="Profesión"></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-xs-12 col-md-4">
+                    <input type="url" name="facebookUrl"  class="form-control" title="Clickea en tu perfil de facebook y copia la url del browser" ng-model="user.facebookUrl" placeholder="Enlace de Facebook ej: https://www.facebook.com/pages/Profesionales-UY/1623709471210001" >
+                    <span ng-show="registerUser.facebookUrl.$touched && registerUser.facebookUrl.$error.url" class="error">URL inválid, no olvide incluir el prefijo https:// o http://</span>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <input type="url" name="twitterUrl" class="form-control" title="Clickea en tu perfil de twiter y copia la url del browser" ng-model="user.twitterUrl" placeholder="Enlace de Twitter" >
+                    <span ng-show="registerUser.twitterUrl.$touched && registerUser.twitterUrl.$error.url" class="error">URL inválid, no olvide incluir el prefijo https:// o http://</span>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <input type="url" name="linkedinUrl" class="form-control" title="Clickea en tu perfil de linkedin y copia la url del browser" ng-model="user.linkedinUrl" placeholder="Enlace de Linkedin">
+                    <span ng-show="registerUser.linkedinUrl.$touched && registerUser.linkedinUrl.$error.url" class="error">URL inválid, no olvide incluir el prefijo https:// o http://</span>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-xs-12 col-md-3" ng-repeat="direccion in direcciones">                    
+                    <input type="text" name="direccion" class="form-control" ng-model="direccion.val" maxlength="50" placeholder="Dirección"><i class="fa fa-minus-square-o" ng-click="removeDireccion(direccion)" title="Borrar Dirección"></i>
+                </div>
+                <div class="direccion" ng-click="addDireccion()" ng-hide="direcciones.length > 9"><i class="fa fa-plus"></i><label>Agregar dirección</label></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Ubicación en mapa</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-12 col-sm-12"> 
+                    <label>Haga click en el mapa para establecer la ubicación</label>
+                </div>
+            </div>
+
+            <div class="row" ng-if="renderMap">
+                <div class="col-xs-12 col-md-12 col-sm-12"> 
+                    <map-Set-Markers  markers-Arr="markers"></map-Set-Markers>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Servicios Prestados</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <textarea class="form-control"style="min-height:100px;" name="descService" rows="2" ng-model="user.descService" placeholder="Breve Descripción: ¿Que es lo que hace su empresa? ¿En que se destaca? ¿Que necesidad satisface?" maxlength="150"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-4">
+                    <input type="text" class="form-control" name="servicioOfrecido1" ng-model="user.servicioOfrecido1" placeholder="Servicio ofrecido: palabras clave" maxlength="30" >
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <input type="text" class="form-control" name="servicioOfrecido2" ng-model="user.servicioOfrecido2" placeholder="Servicio ofrecido: palabras clave" maxlength="30" >
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <input type="text" class="form-control" name="servicioOfrecido3" ng-model="user.servicioOfrecido3" placeholder="Servicio ofrecido: palabras clave" maxlength="30" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-4">
+                    <input type="text" class="form-control" name="servicioOfrecido4" ng-model="user.servicioOfrecido4" placeholder="Servicio ofrecido: palabras clave" maxlength="30" >
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <input type="text" class="form-control" name="servicioOfrecido5" ng-model="user.servicioOfrecido5" placeholder="Servicio ofrecido: palabras clave" maxlength="30" >
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <input type="text" class="form-control" name="servicioOfrecido6" ng-model="user.servicioOfrecido6" placeholder="Servicio ofrecido: palabras clave" maxlength="30" >
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Describa su negocio y/o servicios</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <textarea class="form-control" name="descServiceLong" rows="6" ng-model="user.descServiceLong" placeholder="Describir en detalle todos los servicios que cubres" maxlength="2000"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-2"> 
+                    <label>Formas de Pago</label>
+                </div>
+                <div class="form-group col-xs-12 col-md-6">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6 small-margin-btm">
+                            <div class="btn-group">
+                                <label class="btn btn-default" ng-model="user.formaDePago.contado" btn-checkbox>Contado</label>
+                                <label class="btn btn-default" ng-model="user.formaDePago.debito" btn-checkbox>Débito</label>
+                                <label class="btn btn-default" ng-model="user.formaDePago.credito" btn-checkbox>Crédito</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-5">
+                            <input type="text" class="form-control" ng-model="user.formaDePago.otras" placeholder="Otras" maxlength="30" >
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-2"> 
+                    <label>Días de atención</label>
+                </div>
+                <div class="form-group col-xs-12 col-md-6">
+                    <div class="btn-group">
+                        <label class="btn btn-default" ng-model="user.diasAtencion.lunes" btn-checkbox>Lunes</label>
+                        <label class="btn btn-default" ng-model="user.diasAtencion.martes" btn-checkbox>Martes</label>
+                        <label class="btn btn-default" ng-model="user.diasAtencion.miercoles" btn-checkbox>Miércoles</label>
+                        <label class="btn btn-default" ng-model="user.diasAtencion.jueves" btn-checkbox>Jueves</label>
+                        <label class="btn btn-default" ng-model="user.diasAtencion.viernes" btn-checkbox>Viernes</label>
+                        <label class="btn btn-default" ng-model="user.diasAtencion.sabado" btn-checkbox>Sábado</label>
+                        <label class="btn btn-default" ng-model="user.diasAtencion.domingo" btn-checkbox>Domingo</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-2"> 
+                    <label>Horario de atención</label>
+                </div>
+                <div class="form-group col-xs-12">  
+                    <textarea class="form-control" name="horarioUser" rows="6" ng-model="user.horario" placeholder="Detalle de horario de atención de lunes a domingo." maxlength="1000" ng-maxlength="1000"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="form-group col-md-12">
+            <button type="submit" class="btn btn-primary pull-right" >Registrarme</button>
+            <button class="btn btn-default pull-right" style="margin-right: 15px;" ng-click="goBackRegistration($event)"><i class="fa fa-reply"></i></button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,22 @@
+<div class="dropdown" dropdown>
+    <span class="requiredAst">*</span>
+    <button type="button" class="btn btn-default dropdown-toggle" style="width: 96%"  dropdown-toggle ng-disabled="disabled">        
+        <span class="overflowDots" ng-bind="selectedElem[nameProp]"></span>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu filterUl" role="menu">
+        <li>
+            <div class="input-group"> 
+                <i class="fa fa-times" ng-show="dropdownFilter.length > 0" ng-click="clearModel($event)"></i>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                </span>
+                <input type="text" class="form-control" stop-All-Events ng-model="dropdownFilter" placeholder="{{placeholderFilter}}">
+            </div>
+        </li>
+        <li  ng-repeat="elem in elementsArr| filter:ignoreAccents">
+            <a href="#" ng-click="selectedElement($event, elem)">{{elem[nameProp]}}</a>
+        </li>
+    </ul>
+    <span ng-show="dropdownError" class="error" ng-bind="errorMsg"></span>
+</div>

@@ -1,0 +1,67 @@
+<header class="navbar navbar-inverse navbar-fixed-top">
+    <nav role="navigation" >
+        <div class="container">
+            <div id="alerts"></div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" ng-click="collapsed = !collapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" id="homeLink" href="#"><i class="fa fa-home"></i>Inicio</a>
+            </div>
+            <div class="navbar-collapse navbar-right" ng-class="{'collapse':!collapsed,'':collapsed}" id="mainNavBar">
+                <ul class="nav navbar-nav">
+                    <li class="hidden-xs">
+                        <a href="https://www.facebook.com/profesionalesuy/" ><i class="fa fa-facebook-official primary-icons"></i></a>
+                    </li>
+                    <li class="hidden-xs">
+                        <a href="https://twitter.com/UYProfesionales"><i class="fa fa-twitter-square primary-icons"></i></a>
+                    </li>
+                    <li class="hidden-xs">
+                        <a href="https://uy.linkedin.com/in/profesionales-uy-69423a107/en" ><i class="fa fa-linkedin-square primary-icons"></i></a>
+                    </li>
+                    
+                    <li class="ng-hide" ng-show="$root.user === undefined" ng-click="collapsed = false">
+                        <a id="profRegistarse" href="#registro-usuario" >Registrarse</a>
+                    </li>
+                    <li class="privateComponent ng-hide" ng-click="collapsed = false" ng-show="$root.user !== undefined && !$root.user.IsAdmin">
+                        <a  href="#ver-usuario">Ver Perfil</a>
+                    </li>
+                    <li class="ng-hide" ng-click="collapsed = false" ng-show="$root.user === undefined">
+                        <a id="profIngresar" ng-click="ingresarAction($event, 'lg')" href="#">Ingresar</a>
+                    </li>
+                    <li class="ng-hide" ng-click="collapsed = false" ng-show="$root.user !== undefined">
+                        <a id="profSalir" ng-click="salirAction($event)" href="#">Salir</a>
+                    </li>
+
+                    <li class="privateAdminComponent ng-hide" ng-click="collapsed = false" ng-show="$root.user !== undefined && $root.user.IsAdmin">
+                        <a href="#administrar-users">Administrar Usuarios</a>
+                    </li>
+                    
+                    <li class="privateAdminComponent hidden-sm hidden-md hidden-lg" ng-click="collapsed = false">
+                        <a href="#contacto">Contacto</a>
+                    </li>
+                    <li class="privateAdminComponent hidden-sm hidden-md hidden-lg" ng-click="collapsed = false">
+                        <a href="#/quienessomos">¿Quiénes Somos?</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="row logoRow">
+        <div class="container">
+            <div class="row sm-margin-top">
+                <div class="col-md-2 col-xs-6">
+                    <a href="#"><img class="profLogoImg" src="./resources/img/ProfesionalesNewLogo.png" alt="Profesionales UY"></a>
+                </div>
+                <div class="col-md-4 pull-right col-xs-6 hidden-xs">
+                    <a class="pull-right sub-Header-a" href="#contacto">Contacto</a>
+                    <a class="pull-right sub-Header-a" href="#/quienessomos">¿Quiénes Somos?</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</header>

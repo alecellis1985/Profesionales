@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app="Professionals">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Alexander Ellis">
+        <meta name="description" content="Buscador de profesionales del Uruguay">
+        
+        <!--- BORRAR CUANDO QUIERA HACER ANDAR LA CACHE 
+        <meta http-equiv="cache-control" content="max-age=0" />
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="expires" content="0" />
+        <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+        <meta http-equiv="pragma" content="no-cache" />-->
+        
+        <!--- Cache 3 days -->
+        <meta http-equiv="refresh" content="86400">
+        
+        <meta name="keywords" content="profesionales,escribano,contador,escribanos,dentista,abogado,contadores publicos, escribanos en montevideo">
+        
+        <title>ProfesionalesUy</title>
+        <link type="image/x-icon" rel="shortcut icon"  href="resources/img/profIco2.ico" >
+        <link type="text/css" rel="stylesheet" href="resources/css/styles.min.css?v=1.2.0" > 
+        <!--<link rel="canonical" href="http://profesionales.uy" /> -->
+        <link type="text/css" rel="stylesheet" href="resources/css/common.css?v=1.2.1" >
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:700' rel='stylesheet' type='text/css'>
+    </head>
+    <body style="overflow-x: hidden;">
+        <div class="alertsTop hideAll" ng-controller="AlertController" >
+            <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        </div>
+        <div id="header" ng-controller="HeaderController" ng-include="template.header"></div>
+        <div class="row">
+            <div class="container contentContainer"  ng-style="style()" style="margin-top:68px;" resize resize-height="120"> 
+                <ng-view></ng-view>
+            </div>
+        </div>
+        <div class="footer" ng-controller="FooterController" ng-include="template.footer"></div>
+        <script type="text/javascript" src="resources/js/libs/googleAnalitics.js"></script>
+        <!--<script type="text/javascript" src="resources/js/libs/jquery.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        
+        <!--<script type="text/javascript" src="resources/js/libs/angular.min.js"></script> -->
+        <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>-->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.js"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCJrNyu7609huK8yNPwF5jxkeyiinAiqhc"></script>
+        
+        
+        <script type="text/javascript" src="resources/js/libs/route.min.js"></script>
+        <script type="text/javascript" src="resources/js/libs/plugins.min.js?v=1.2.0"></script>
+        <script type="text/javascript" src ="resources/js/app.js?v=1.2.0"></script>
+        <script type="text/javascript" src ="resources/js/appAndServices.min.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/libs/ui-bootstrap-tpls-0.14.3.min.js"></script>
+        
+        <script type="text/javascript" src="resources/js/filters/profesionalesFilters.js?v=1.2.0"></script>
+        
+        <script type="text/javascript" src="resources/js/libs/lodash.min.js"></script>
+        <script  type="text/javascript" src="resources/js/libs/angularjs-dropdown-multiselect.min.js"></script>
+        <script  type="text/javascript" src="resources/js/libs/ng-fi-text.min.js"></script>
+        <!-- FOR FILE UPLOAD -->
+        <script  type="text/javascript" src="resources/js/libs/angular-file-upload.min.js"></script>        
+        
+        <!--<script  type="text/javascript" src="resources/js/directives/directives.min.js?v=1.2.0"></script>-->
+        <!--<script  type="text/javascript" src="resources/js/controllers/Controllers.min.js?v=1.2.0"></script>-->
+        
+          
+        <script type="text/javascript" src="resources/js/directives/commonDirectives.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/directives/Planes.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/directives/GoogleMaps.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/directives/UserDetailsDirective.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/directives/RegisterUserValidations.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/controllers/EditUserController.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/controllers/UsersController.js?v=1.2.1"></script>
+        <script type="text/javascript" src="resources/js/controllers/HeaderController.js?v=1.2.1"></script>
+        <script type="text/javascript" src="resources/js/controllers/AlertController.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/controllers/HomeController.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/controllers/FooterController.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/controllers/LoginController.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/controllers/ContactoController.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/controllers/TopPropagandaController.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/controllers/ProfessionalsSearchController.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/controllers/RegisterUserController.js?v=1.2.3"></script>       
+        <script type="text/javascript" src="resources/js/controllers/VerUserController.js?v=1.2.0"></script>    
+        <script type="text/javascript" src="resources/js/controllers/EditImgController.js?v=1.2.0"></script>    
+        <script type="text/javascript" src="resources/js/controllers/EditPwdController.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/controllers/ResetPasswordController.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/controllers/SendResetPasswordController.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/controllers/EmailController.js?v=1.2.0"></script>
+        <script type="text/javascript" src="resources/js/controllers/EditCatPrincipalController.js?v=1.2.0"></script>
+    </body>
+</html>

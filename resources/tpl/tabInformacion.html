@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-xs-12">
+        <label>Días Atención</label>
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-xs-12">
+                <span  ng-if="selectedUser.lunes == 1">Lunes </span>
+                <span  ng-if="selectedUser.martes == 1">Martes </span>
+                <span  ng-if="selectedUser.miercoles == 1">Miércoles </span>
+                <span  ng-if="selectedUser.jueves == 1">Jueves </span>
+                <span  ng-if="selectedUser.viernes == 1">Viernes </span>
+                <span  ng-if="selectedUser.sabado == 1">Sábado </span>
+                <span  ng-if="selectedUser.domingo == 1">Domingo </span>
+            </div>  
+        </div>
+        <label>Horarios Atención</label>
+        <p>{{selectedUser.horario}}</p>
+    </div>
+</div>
+
+

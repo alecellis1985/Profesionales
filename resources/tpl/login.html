@@ -1,0 +1,27 @@
+<div class="modal-header">
+    <h3 class="modal-title">Ingresar</h3>
+</div>
+<form ng-submit="loginUser($event)" id="logInForm" role="form" method="POST">
+    <div class="modal-body">
+        <div class="modal-body">
+                <div class="form-group">
+                    <label for="userName">Usuario:</label>
+                    <input type="text" name="username" class="form-control" id="userName" ng-model="userLogin.username" placeholder="usuario" required>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Contraseña:</label>
+                    <input type="password" class="form-control" name="password" id="pwd" ng-model="userLogin.password" placeholder="contraseña" required>
+                </div>
+                <div class="form-group">
+                    <a href="#/restaurar-password" stop-event ng-click="closeModal($event)">¿Olvidó su contraseña?</a>
+                </div>
+                <div class="form-group hide">
+                    <span id="logInErrors" class="error"></span>
+                </div>
+            </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-default">Ingresar</button>
+        <button class="btn btn-primary" ng-click="cancel($event)">Cerrar</button>
+    </div>
+</form>

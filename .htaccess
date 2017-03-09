@@ -1,0 +1,44 @@
+
+RewriteEngine on
+
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+
+<ifModule mod_headers.c>
+Header unset ETag
+</ifModule>
+FileETag None
+
+### HEADER CACHING
+# /htaccess/speed-up-sites-with-htaccess-caching.html
+<FilesMatch "\.(flv|gif|jpg|jpeg|png|ico)$">
+Header set Cache-Control "max-age=2592000"
+</FilesMatch>
+<FilesMatch "\.(js|css|pdf|swf)$">
+Header set Cache-Control "max-age=604800"
+</FilesMatch>
+<FilesMatch "\.(html|htm|txt)$">
+Header set Cache-Control "max-age=600"
+</FilesMatch>
+<FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
+Header unset Cache-Control
+</FilesMatch>
+RewriteCond %{HTTP_HOST} ^profesionales\.xtreamcoding\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.profesionales\.xtreamcoding\.com$
+RewriteRule ^/?$ "http\:\/\/www\.profesionales\.uy" [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^profesionalesuy\.xtreamcoding\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.profesionalesuy\.xtreamcoding\.com$
+RewriteRule ^/?$ "http\:\/\/www\.profesionales\.uy" [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^profesionales\.com\.uy$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.profesionales\.com\.uy$
+RewriteRule ^/?$ "http\:\/\/www\.profesionales\.uy" [R=301,L]
+

@@ -1,0 +1,224 @@
+<div class="row">
+    <div class="row">
+        <div class="container special-cont">
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-4 col-sm-12">
+                    <h3>Usuario <i>{{currentUsername}}</i></h3>
+                </div>
+                <div class="form-group col-sm-12 col-md-8 md-margin-top">
+                    <!--TODO: cambiar todo los estilos a clases-->
+                    <button class="btn btn-primary pull-right xs-margin-left" ng-click="editUserData($event)"><i class="fa fa-pencil"></i> Editar Perfil </button>
+                    <button class="btn btn-primary pull-right" ng-click="editUserPwd($event)"><i class="fa fa-pencil"></i> Editar contraseña</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-primary" style="margin-top:10px;">
+    <div class="panel-heading">
+        <h3 class="panel-title" ng-hide="registro.empresa">Datos personales de contacto</h3>
+        <h3 class="panel-title" ng-show="registro.empresa">Datos de la Empresa</h3>
+    </div>
+    <div class="panel-body personalData">
+        <div class="row ">
+            <div class="form-group col-xs-12 col-md-4">
+                <label>Nombre</label><br />
+                <p>{{user.nombre}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
+                <label>Apellido</label><br />
+                <p>{{user.apellido}}</p>
+            </div>
+            <div class="form-group col-xs-10 col-md-3">
+                <label>Nombre de Usuario</label><br />
+                <p>{{user.username}}</p>
+            </div>
+        </div>
+        <div class="row">            
+            <div class="form-group col-xs-12 col-md-4">
+                <label>Email</label><br />
+                <p>{{user.email}}</p>
+            </div>  
+            <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
+                <label>Teléfono</label><br />
+                <p>{{user.telefono}}</p>
+            </div>
+            <div class="form-group col-xs-12 col-md-4" ng-hide="registro.empresa">
+                <label>Celular</label><br />
+                <p>{{user.celular}}</p>
+            </div>
+        </div>
+        <div class="row">            
+            <div class="form-group col-xs-12 col-md-4">
+                <button class="btn btn-primary pull-left" ng-click="editUserImg($event)"><i class="fa fa-pencil"></i> Cambiar Imagen</button>
+            </div>  
+        </div>
+        <div class="row">
+                <div class="col-xs-3 col-sm-3 col-md-2" style="margin-bottom: 10px;">     
+                <div ng-if="showImg">
+                    <fancy-img ng-if="imageUrl !== undefined && imageUrl !== ''" background-url="{{imageUrl}}" ></fancy-img>
+                </div>
+                <!--<fancy-img ng-if="imageUrl.get() !== undefined && imageUrl.get() !== ''" background-url="{{imageUrl.get()}}" ></fancy-img>-->
+                <div class="cardColor" ng-style="{'background-color':user.cardcolor}" ng-if="user.plan < 7 && user.cardcolor && (imageUrl.get() === undefined || imageUrl.get() === '')">
+                    <h3 class="nice-h6" style='text-transform: uppercase;' ng-fi-text ng-fi-text-html="{{ user.nombre | limitTo:1 }}{{ user.apellido | limitTo:1 }}"></h3>
+                    <h3 class="nice-h7" ng-fi-text="Profesional"></h3>
+                </div>
+                <div class="cardColor" ng-style="{'background-color':user.cardcolor}" ng-if="user.plan > 6 && user.cardcolor && (imageUrl.get() === undefined || imageUrl.get() === '')">
+                    <h3 class="nice-h6" ng-fi-text ng-fi-text-html="{{ user.nombre }}"></h3>
+                    <h3 class="nice-h7" ng-fi-text="Categoria"></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Datos de tu negocio</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">            
+                <div class="form-group col-xs-12 col-md-4">
+                    <button class="btn btn-primary pull-left" ng-click="editCatPrincipal($event)"><i class="fa fa-pencil"></i> Cambiar Categoría Principal</button>
+                </div>  
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-4">
+                    <label >Categoría(s)</label><br />
+                    <p>{{user.selectedCategoriaText}}</p>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <label >Categoría Principal</label><br />
+                    <p>{{user.categoria}}</p>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <label >Departamento(s)</label><br />
+                    <p>{{user.selectedDepartamentoText}}</p>
+                </div>
+
+            </div>
+            <div class="row ">
+                <div class="form-group col-xs-12 col-md-4">
+                    <label>Direccién(es)</label><br />
+                    <p>{{user.direccion}}</p>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <label>Teléfono Empresa</label><br />
+                    <p >{{user.telefonoEmp}}</p>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <label>Sitio Web</label><br />
+                    <p>{{user.sitioWeb}}</p>
+                </div>       
+
+            </div>
+            <div class="row ">
+                <div class="form-group col-xs-12 col-md-12">
+                    <h4>Redes Sociales Links</h4>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <label >Facebook</label><br />
+                    <p>{{user.facebookUrl}}</p>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <label >Twitter</label><br />
+                    <p>{{user.twitterUrl}}</p>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <label >LinkedIn</label><br />
+                    <p>{{user.linkedinUrl}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Ubicación en mapa</h3>
+        </div>
+        <div class="panel-body">
+            <map-Load-Markers ng-if="registro.mostrarRegistro" locations="markers"></map-Load-Markers>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Servicios Prestados</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <label for="descService">Breve Descripción</label>
+                    <textarea id="descService" disabled="disabled" style="width: 100%;height: 125px;">{{user.descService}}</textarea>
+                </div>
+            </div> 
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <label>Servicios Ofrecidos</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-4">
+                    <p class="form-group-inline">{{user.servicioOfrecido1}}</p>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <p class="form-group-inline">{{user.servicioOfrecido2}}</p>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <p class="form-group-inline">{{user.servicioOfrecido3}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-4">
+                    <p class="form-group-inline">{{user.servicioOfrecido4}}</p>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <p class="form-group-inline">{{user.servicioOfrecido5}}</p>
+                </div>
+                <div class="form-group col-xs-12 col-md-4">
+                    <p class="form-group-inline">{{user.servicioOfrecido5}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Describa su negocio y/o servicios</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <label for="descServiceLong">Descripcion detallada</label>
+                    <textarea id="descServiceLong" disabled="disabled" style="width: 100%;height: 250px;" ng-bind="user.descServiceLong"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-12"> 
+                    <label>Formas de Pago</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-12"> 
+                    <p id="formasDePago" >{{user.formasDePagoText}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-2"> 
+                    <label>Dias de atención</label>
+                </div>            
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-12"> 
+                    <p id="diasAtencion" >{{user.diasAtencionText}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-2"> 
+                    <label>Horario de atención</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-12"> 
+                    <p id="horarioAtencion" >{{user.horario}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+

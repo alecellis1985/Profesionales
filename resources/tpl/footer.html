@@ -1,0 +1,24 @@
+<div class='container'>
+    <div class='row'>
+        <i class="fa fa-arrow-up pull-right" scroll-To-Top></i>
+        <div class='col-sm-4 col-md-4 col-xs-12'>
+            <h3><a href="#/quienessomos">¿Quiénes Somos?</a></h3>
+        </div>
+
+        <div class='col-sm-4 col-xs-12 col-md-4'>
+            <h3>Acceso</h3>
+            <ul class='list-unstyled'>
+                <li ng-show="$root.user === undefined"><a href='#registro-usuario'>Registrarse</a></li>
+                <li ng-show="$root.user === undefined"><trigger-Click text="Ingresar" selector="#profIngresar"></trigger-Click></li>
+                <li ng-show="$root.user !== undefined"><trigger-Click text="Salir" selector="#profSalir"></trigger-Click></li>
+            </ul>
+        </div>
+        <div class='col-sm-4 col-md-4 col-xs-12'>
+            <h3><a href='#contacto'>Contáctanos</a></h3>
+            <ul class='list-unstyled'>
+                <li><i class='glyphicon glyphicon-globe'></i> Montevideo, UY<li>
+                <li><i class='glyphicon glyphicon-envelope'></i> <a href='#contacto'>Envíanos un mail</a><li>
+            </ul>
+        </div>
+    </div>
+</div>
